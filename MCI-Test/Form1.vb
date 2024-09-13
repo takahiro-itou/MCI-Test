@@ -11,8 +11,8 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         '再生するファイル名
-        Dim curDir As String = Application.StartupPath
-        Dim fileName As String = "Test.wmv"
+        Dim curDir = Application.StartupPath
+        Dim fileName = "Test.wmv"
 
         Dim cmd As String
 
