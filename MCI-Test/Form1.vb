@@ -104,4 +104,13 @@
             Return
         End If
     End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Dim cmd As String
+
+        cmd = "pause " & aliasName
+        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+            Return
+        End If
+    End Sub
 End Class
