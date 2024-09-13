@@ -20,8 +20,12 @@
         cmd = "open """ + fileName + """ alias " + aliasName
         If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
             Return
-        End If '再生する
+        End If
 
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        '再生する
         cmd = "play " + aliasName
         mciSendString(cmd, Nothing, 0, IntPtr.Zero)
     End Sub
