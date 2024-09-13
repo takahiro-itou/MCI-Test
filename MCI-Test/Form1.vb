@@ -132,6 +132,8 @@ Public Class Form1
         Dim cmd As String
         Dim resText As System.Text.StringBuilder
         Dim filePos As Long, fileLen As Long
+        Dim result As Integer
+        Dim errMsg As String
 
         resText = New System.Text.StringBuilder(512)
         cmd = "status " & aliasName & " position"
@@ -153,18 +155,28 @@ Public Class Form1
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         ' シーク
         Dim cmd As String
+        Dim result As Integer
+        Dim errMsg As String
 
         cmd = "seek " & aliasName & " to 90000"
-        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+        result = mciSendString(cmd, Nothing, 0, IntPtr.Zero)
+        If result <> 0 Then
+            errMsg = getMciError(result)
+            MessageBox.Show(errMsg)
             Return
         End If
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Dim cmd As String
+        Dim result As Integer
+        Dim errMsg As String
 
         cmd = "pause " & aliasName
-        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+        result = mciSendString(cmd, Nothing, 0, IntPtr.Zero)
+        If result <> 0 Then
+            errMsg = getMciError(result)
+            MessageBox.Show(errMsg)
             Return
         End If
     End Sub
