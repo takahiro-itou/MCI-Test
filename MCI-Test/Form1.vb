@@ -58,7 +58,12 @@
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Dim cmd As String
 
+        cmd = "resume " & aliasName
+        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+            Return
+        End If
     End Sub
 
     Public Function getValue(ByVal resStr As String) As Long
