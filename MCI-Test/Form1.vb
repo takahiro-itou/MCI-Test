@@ -1,4 +1,6 @@
-﻿Public Class Form1
+﻿Imports System.Runtime.CompilerServices
+
+Public Class Form1
 
     <System.Runtime.InteropServices.DllImport("winmm.dll",
     CharSet:=System.Runtime.InteropServices.CharSet.Auto)>
@@ -7,7 +9,24 @@
     ByVal bufferSize As Integer, ByVal hwndCallback As IntPtr) As Integer
     End Function
 
+    <System.Runtime.InteropServices.DllImport("winmm.dll",
+    CharSet:=System.Runtime.InteropServices.CharSet.Auto)>
+    Private Shared Function mciGetErrorString(ByVal fdwError As Integer, ByVal lpszErrorText As System.Text.StringBuilder, ByVal cchErrorText As Integer) As Integer
+
+    End Function
+
     Private aliasName As String = "MediaFile"
+
+    Private Function getMciError(ByVal fdwError As Integer) As String
+        Dim resText As System.Text.StringBuilder
+        Dim retErr As String
+
+        resText = New System.Text.StringBuilder(512)
+        mciGetErrorString(fdwError, resText, resText.Capacity)
+        retErr = resText.ToString()
+        Return retErr
+    End Function
+
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         '再生するファイル名
@@ -59,9 +78,14 @@
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Dim cmd As String
+        Dim result As Integer
+        Dim errMsg As String
 
         cmd = "resume " & aliasName
-        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+        result = mciSendString(cmd, Nothing, 0, IntPtr.Zero)
+        If result <> 0 Then
+            errMsg = getMciError(result)
+            MessageBox.Show(errMsg)
             Return
         End If
     End Sub
