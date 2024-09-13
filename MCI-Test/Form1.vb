@@ -23,6 +23,11 @@
             Return
         End If
 
+        cmd = "set " & aliasName & " time format milliseconds"
+        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+            Label1.Text = "Failed to set TimeFormat"
+        End If
+
         cmd = "window " & aliasName & " handle " & PictureBox1.Handle.ToString
         If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
             Return
