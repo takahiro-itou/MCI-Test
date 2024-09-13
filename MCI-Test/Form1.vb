@@ -86,6 +86,12 @@
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        ' シーク
+        Dim cmd As String
 
+        cmd = "seek " & aliasName & " to 90000"
+        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+            Return
+        End If
     End Sub
 End Class
