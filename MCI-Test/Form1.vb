@@ -75,17 +75,29 @@ Public Class Form1
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim cmd As String
+        Dim result As Integer
+        Dim errMsg As String
 
         '再生する
         cmd = "play " + aliasName
-        mciSendString(cmd, Nothing, 0, IntPtr.Zero)
+        result = mciSendString(cmd, Nothing, 0, IntPtr.Zero)
+        If result <> 0 Then
+            errMsg = getMciError(result)
+            MessageBox.Show(errMsg)
+            Return
+        End If
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Dim cmd As String
+        Dim result As Integer
+        Dim errMsg As String
 
         cmd = "stop " & aliasName
-        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+        result = mciSendString(cmd, Nothing, 0, IntPtr.Zero)
+        If result <> 0 Then
+            errMsg = getMciError(result)
+            MessageBox.Show(errMsg)
             Return
         End If
     End Sub
