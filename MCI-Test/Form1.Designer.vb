@@ -30,6 +30,7 @@ Partial Class Form1
         Button4 = New Button()
         Button5 = New Button()
         Button6 = New Button()
+        Button7 = New Button()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -70,7 +71,7 @@ Partial Class Form1
         ' 
         ' Button2
         ' 
-        Button2.Location = New Point(199, 305)
+        Button2.Location = New Point(102, 344)
         Button2.Name = "Button2"
         Button2.Size = New Size(75, 23)
         Button2.TabIndex = 5
@@ -79,7 +80,7 @@ Partial Class Form1
         ' 
         ' Button4
         ' 
-        Button4.Location = New Point(280, 305)
+        Button4.Location = New Point(183, 305)
         Button4.Name = "Button4"
         Button4.Size = New Size(75, 23)
         Button4.TabIndex = 6
@@ -88,7 +89,7 @@ Partial Class Form1
         ' 
         ' Button5
         ' 
-        Button5.Location = New Point(12, 344)
+        Button5.Location = New Point(290, 305)
         Button5.Name = "Button5"
         Button5.Size = New Size(75, 23)
         Button5.TabIndex = 7
@@ -97,18 +98,28 @@ Partial Class Form1
         ' 
         ' Button6
         ' 
-        Button6.Location = New Point(102, 344)
+        Button6.Location = New Point(290, 344)
         Button6.Name = "Button6"
         Button6.Size = New Size(75, 23)
         Button6.TabIndex = 8
         Button6.Text = "Seek"
         Button6.UseVisualStyleBackColor = True
         ' 
+        ' Button7
+        ' 
+        Button7.Location = New Point(183, 344)
+        Button7.Name = "Button7"
+        Button7.Size = New Size(75, 23)
+        Button7.TabIndex = 9
+        Button7.Text = "Pause"
+        Button7.UseVisualStyleBackColor = True
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(377, 385)
+        Controls.Add(Button7)
         Controls.Add(Button6)
         Controls.Add(Button5)
         Controls.Add(Button4)
@@ -131,5 +142,6 @@ Partial Class Form1
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Button6 As Button
+    Friend WithEvents Button7 As Button
 
 End Class
