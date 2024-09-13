@@ -34,26 +34,40 @@ Public Class Form1
         Dim fileName = "Test.wmv"
 
         Dim cmd As String
+        Dim result As Integer
+        Dim errMsg As String
         Dim cs = PictureBox1.ClientSize
 
         'ファイルを開く
         cmd = "open """ + fileName + """ alias " + aliasName
-        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+        result = mciSendString(cmd, Nothing, 0, IntPtr.Zero)
+        If result <> 0 Then
+            errMsg = getMciError(result)
+            MessageBox.Show(errMsg)
             Return
         End If
 
         cmd = "set " & aliasName & " time format milliseconds"
-        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
-            Label1.Text = "Failed to set TimeFormat"
+        result = mciSendString(cmd, Nothing, 0, IntPtr.Zero)
+        If result <> 0 Then
+            errMsg = getMciError(result)
+            MessageBox.Show(errMsg)
+            Return
         End If
 
         cmd = "window " & aliasName & " handle " & PictureBox1.Handle.ToString
-        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+        result = mciSendString(cmd, Nothing, 0, IntPtr.Zero)
+        If result <> 0 Then
+            errMsg = getMciError(result)
+            MessageBox.Show(errMsg)
             Return
         End If
 
         cmd = String.Format("put {2} destination at 0 0 {0} {1}", cs.Width, cs.Height, aliasName)
-        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+        result = mciSendString(cmd, Nothing, 0, IntPtr.Zero)
+        If result <> 0 Then
+            errMsg = getMciError(result)
+            MessageBox.Show(errMsg)
             Return
         End If
 
