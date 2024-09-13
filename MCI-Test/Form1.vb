@@ -42,4 +42,50 @@
         cmd = "play " + aliasName
         mciSendString(cmd, Nothing, 0, IntPtr.Zero)
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
+    End Sub
+
+    Public Function getValue(ByVal resStr As String) As Long
+        If Not IsNumeric(resStr) Then resStr = "0"
+
+        If Long.Parse(resStr) < 0 Then
+            Return ((Long.Parse(resStr) And &H7FFF) + 2 ^ 15)
+        Else
+            Return Long.Parse(resStr)
+        End If
+    End Function
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        ' 現在位置と長さ
+        Dim ret As Integer
+        Dim cmd As String
+        Dim resText As System.Text.StringBuilder
+        Dim filePos As Long, fileLen As Long
+
+        resText = New System.Text.StringBuilder(512)
+        cmd = "status " & aliasName & " position"
+        ret = mciSendString(cmd, resText, resText.Capacity, IntPtr.Zero)
+        If ret = 0 Then
+            filePos = getValue(resText.ToString())
+        End If
+
+        resText = New System.Text.StringBuilder(512)
+        cmd = "status " & aliasName & " length"
+        ret = mciSendString(cmd, resText, resText.Capacity, IntPtr.Zero)
+        If ret = 0 Then
+            fileLen = getValue(resText.ToString())
+        End If
+
+        Label1.Text = String.Format("{0:#,##0} / {1:#,##0}", filePos, fileLen)
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+
+    End Sub
 End Class
