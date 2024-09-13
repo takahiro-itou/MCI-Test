@@ -8,4 +8,21 @@
     End Function
 
     Private aliasName As String = "MediaFile"
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        '再生するファイル名
+        Dim curDir As String = Application.StartupPath
+        Dim fileName As String = "Test.wmv"
+
+        Dim cmd As String
+
+        'ファイルを開く
+        cmd = "open """ + fileName + """ alias " + aliasName
+        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+            Return
+        End If '再生する
+
+        cmd = "play " + aliasName
+        mciSendString(cmd, Nothing, 0, IntPtr.Zero)
+    End Sub
 End Class
