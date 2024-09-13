@@ -22,9 +22,16 @@
             Return
         End If
 
+        cmd = "window " & aliasName & " handle " & PictureBox1.Handle.ToString
+        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+            Return
+        End If
+
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim cmd As String
+
         '再生する
         cmd = "play " + aliasName
         mciSendString(cmd, Nothing, 0, IntPtr.Zero)
