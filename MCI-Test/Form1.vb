@@ -15,6 +15,7 @@
         Dim fileName = "Test.wmv"
 
         Dim cmd As String
+        Dim cs = PictureBox1.ClientSize
 
         'ファイルを開く
         cmd = "open """ + fileName + """ alias " + aliasName
@@ -23,6 +24,11 @@
         End If
 
         cmd = "window " & aliasName & " handle " & PictureBox1.Handle.ToString
+        If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
+            Return
+        End If
+
+        cmd = String.Format("put {2} destination at 0 0 {0} {1}", cs.Width, cs.Height, aliasName)
         If mciSendString(cmd, Nothing, 0, IntPtr.Zero) <> 0 Then
             Return
         End If
